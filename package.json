@@ -1,0 +1,16 @@
+{
+  "name": "slicer-bot",
+  "version": "1.0.0",
+  "description": "Randomly picks word and create a masheed up and sliced up tweet everyday.",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "twit": "^2.2.11"
+  }
+}
