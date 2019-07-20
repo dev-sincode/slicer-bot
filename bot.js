@@ -7,9 +7,15 @@ var T = new Twit(config);
 
 
 // geting tweets based on a query parameters
+keywords =['coding','love','coffee','heroes','javscript','games'];
+var min = 0;
+var max =6;
+var pick_keyword = keywords[Math.floor(Math.random() * (+max - +min)) + +min];
+//console.log(pick_keyword);
+
 query ={
-    q: 'challenge', 
-    count: 2
+    q: pick_keyword, 
+    count: 10
 };
 T.get('search/tweets', query, tweetReceived);
 
@@ -19,25 +25,43 @@ function tweetReceived(err, data, response) {
         //console.log(err);
     }
     else{
+        
         var tweets = data.statuses;
+        var slicedTweet='';
+        //console.log(tweets);
         for (var c=0;c<tweets.length;c++){
-            console.log(tweets[c].text);
+            tweetText= tweets[c].text;
+            //console.log(typeof(tweetText)); //strings
+            var stringarray = tweetText.split(" ");
+            //console.log(stringarray);
+            //console.log(typeof(stringarray));
+            var randPick = [];
+            randPick.push(stringarray[Math.floor(Math.random() * (+stringarray.length - +0)) + +0]);
+            //console.log(randPick);
+            
+            for (var i=0 ; i<randPick.length ; i++){
+                slicedTweet = slicedTweet + ' '+ randPick[0];
+            }
+
+            //console.log(slicedTweet);
+            
         }
+        setInterval(postTweet,1000*60*120); //posting every 2 hours
+        postTweet(slicedTweet);
         
     }
   };
 
 // posting a tweet
 
-setInterval(postTweet,1000*60*120);
-postTweet();
+//setInterval(postTweet,1000*60*120);
 
-function postTweet() {
+function postTweet(txt) {
 
-    var rand = Math.floor(Math.random()*100);
+    //var rand = Math.floor(Math.random()*100);
 
 tweetText ={
-    status: '#slicer-bot hello world!'+rand
+    status: txt
 };
 
 T.post('statuses/update', tweetText , tweetedSuccess);
