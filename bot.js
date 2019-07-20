@@ -28,8 +28,16 @@ function tweetReceived(err, data, response) {
   };
 
 // posting a tweet
+
+setInterval(postTweet,1000*60*120);
+postTweet();
+
+function postTweet() {
+
+    var rand = Math.floor(Math.random()*100);
+
 tweetText ={
-    status: '#maser-bot hello world!'
+    status: '#slicer-bot hello world!'+rand
 };
 
 T.post('statuses/update', tweetText , tweetedSuccess);
@@ -44,3 +52,4 @@ function tweetedSuccess(err, data, response) {
     }
     
   }
+};
